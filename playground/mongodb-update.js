@@ -8,6 +8,8 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
 
   const db = client.db('TodoApp')
 
+  // search mongodb update operations
+
   // findOneAndUpdate(filter, update, options, cb)
   // db.collection('Todos')
   //   .findOneAndUpdate(

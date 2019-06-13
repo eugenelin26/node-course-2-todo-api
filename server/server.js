@@ -6,7 +6,13 @@
 // heroku create
 // heroku addons:create mongolab:sandbox
 // heroku config
+// git commit -am 'message'
+// git heroku push master
 
+// heroku logs
+// can see errors
+
+// from heroku config
 // you will see MONGODB_URI which can be
 // accessed from process.env
 
@@ -24,7 +30,7 @@ var { User } = require('./models/user')
 // save with promise
 
 var app = express()
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 // middleware
 app.use(bodyParser.json())

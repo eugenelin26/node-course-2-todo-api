@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
 
-// heroku config
-
+// from  the command 'heroku config'
 // you will see MONGODB_URI which can be
 // accessed from process.env
 

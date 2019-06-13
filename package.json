@@ -4,12 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "node server/server.js",
+    "start-go": "nodemon server/server.js",
+    "test": "mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec yarn test"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.15"
+  },
+  "devDependencies": {
+    "expect": "^24.8.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }

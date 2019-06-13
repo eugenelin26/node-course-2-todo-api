@@ -1,5 +1,6 @@
 var express = require('express')
 var bodyParser = require('body-parser')
+var { ObjectID } = require('mongodb')
 
 var { mongoose } = require('./db/mongoose')
 
@@ -16,6 +17,7 @@ var app = express()
 app.use(bodyParser.json())
 
 // routes
+// create
 app.post('/todos', (req, res) => {
   // console.log(req.body)
   var todo = new Todo({
@@ -33,6 +35,7 @@ app.post('/todos', (req, res) => {
   )
 })
 
+// find all
 app.get('/todos', (req, res) => {
   Todo.find().then(
     todos => {
@@ -42,6 +45,26 @@ app.get('/todos', (req, res) => {
       res.status(400).send(e)
     }
   )
+})
+
+// find by id // :id variable from url
+app.get('/todos/:id', (req, res) => {
+  // res.send(req.params)
+  var id = req.params.id
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send()
+  }
+
+  Todo.findById(id)
+    .then(todo => {
+      if (!todo) {
+        return res.status(404).send()
+      }
+
+      res.send({ todo })
+    })
+    .catch(e => res.status(400).send(e))
 })
 
 // listening port

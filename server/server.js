@@ -1,3 +1,15 @@
+// To deploy app to heroku, go to package.json
+// add start script
+// add engine and node version
+
+// === commands ===
+// heroku create
+// heroku addons:create mongolab:sandbox
+// heroku config
+
+// you will see MONGODB_URI which can be
+// accessed from process.env
+
 var express = require('express')
 var bodyParser = require('body-parser')
 var { ObjectID } = require('mongodb')
@@ -12,6 +24,7 @@ var { User } = require('./models/user')
 // save with promise
 
 var app = express()
+const port = process.env.port || 3000
 
 // middleware
 app.use(bodyParser.json())
@@ -68,8 +81,8 @@ app.get('/todos/:id', (req, res) => {
 })
 
 // listening port
-app.listen(3000, () => {
-  console.log('Started on port 3000')
+app.listen(port, () => {
+  console.log(`Started on port ${port}`)
 })
 
 module.exports = {

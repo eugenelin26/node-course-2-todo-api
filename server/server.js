@@ -36,6 +36,8 @@ var { mongoose } = require('./db/mongoose')
 var { Todo } = require('./models/todo')
 var { User } = require('./models/user')
 
+var { authenticate } = require('./middleware/authenticate')
+
 // create new instance
 // save with promise
 
@@ -45,6 +47,7 @@ const port = process.env.PORT || 3000
 // middleware
 app.use(bodyParser.json())
 
+// ================================================
 // routes
 // Todos
 // create
@@ -143,6 +146,7 @@ app.patch('/todos/:id', (req, res) => {
     })
     .catch(e => res.status(400).send())
 })
+// ================================================
 
 // Users
 // create user
@@ -168,6 +172,25 @@ app.post('/users', (req, res) => {
     .catch(e => res.status(400).send(e))
 })
 
+// get user
+app.get('/users/me', authenticate, (req, res) => {
+  // var token = req.header('x-auth')
+
+  // User.findByToken(token)
+  //   .then(user => {
+  //     if (!user) {
+  //       return Promise.reject()
+  //     }
+
+  //     res.send(user)
+  //   })
+  //   .catch(e => res.status(401).send())
+
+  // from middleware
+  res.send(req.user)
+})
+
+// ===============================================
 // listening port
 app.listen(port, () => {
   console.log(`Started on port ${port}`)

@@ -1,3 +1,8 @@
+// To start database, type commands
+// sudo service mongod start
+// sudo service mongod status
+
+// ===========================================
 // To deploy app to heroku, go to package.json
 // add start script
 // add engine and node version
@@ -16,6 +21,7 @@
 // from heroku config
 // you will see MONGODB_URI which can be
 // accessed from process.env
+//============================================
 
 require('./config/config.js')
 
@@ -40,6 +46,7 @@ const port = process.env.PORT || 3000
 app.use(bodyParser.json())
 
 // routes
+// Todos
 // create
 app.post('/todos', (req, res) => {
   // console.log(req.body)
@@ -135,6 +142,30 @@ app.patch('/todos/:id', (req, res) => {
       res.send({ todo })
     })
     .catch(e => res.status(400).send())
+})
+
+// Users
+// create user
+app.post('/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password'])
+  var user = new User(body)
+
+  // model methods (eg User) and instance methods (eg user)
+  // User.findByToken //
+  // user.generateAuthToken // individual document
+
+  user
+    .save()
+    .then(() => {
+      // user here is not the same as user above
+      return user.generateAuthToken()
+    })
+    .then(token => {
+      // header has 2 arguments
+      // 'x-' custom header
+      res.header('x-auth', token).send(user)
+    })
+    .catch(e => res.status(400).send(e))
 })
 
 // listening port

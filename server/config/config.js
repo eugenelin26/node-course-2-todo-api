@@ -26,4 +26,5 @@ if (env === 'development' || env === 'test') {
 // heroku config:get NAME // get name, in this case, Eugene
 // heroku config:unset NAME // remove name
 
-// need to set JWT_ENV
+// need to set JWT_SECRET
+// heroku config:set JWT_SECRET=apsodfhsdjncxpkjzxnv

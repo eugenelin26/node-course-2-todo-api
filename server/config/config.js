@@ -28,3 +28,11 @@ if (env === 'development' || env === 'test') {
 
 // need to set JWT_SECRET
 // heroku config:set JWT_SECRET=apsodfhsdjncxpkjzxnv
+
+// heroku config:get MONGODB_URI
+// mongodb://heroku_fxr440lh:c51vh0ptsg5t0dpif0t0qa5plu@ds237357.mlab.com:37357/heroku_fxr440lh
+// username: heroku_fxr440lh
+// password: c51vh0ptsg5t0dpif0t0qa5plu
+// address: ds237357.mlab.com
+// port : 37357
+// database: heroku_fxr440lh // usually same as username
